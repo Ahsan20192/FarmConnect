@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router";
 
+const navigate = useNavigate();
 const AuthModal = ({ isOpen, onClose }) => {
   const [isSignup, setIsSignup] = useState(false);
   const [role, setRole] = useState("Farmer");
@@ -94,6 +96,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         localStorage.setItem("token", data.token);
         alert("✅ Logged in successfully!");
         onClose();
+        navigate("/farmer");
       }
     } catch (err) {
       setErrorMessage(err.message || "Server error");
@@ -338,4 +341,3 @@ const AuthModal = ({ isOpen, onClose }) => {
 };
 
 export default AuthModal;
-

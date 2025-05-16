@@ -859,72 +859,52 @@ const LandingPage = () => {
             to help you grow!
           </p>
 
-          <div className="grid md:grid-cols-2 gap-12 text-left">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-16 text-center transition-all duration-500">
             {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-8 max-w-md"
             >
-              <div className="flex items-start gap-4">
-                <motion.div
-                  className="p-3 bg-green-100 rounded-lg"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <FaMapMarkerAlt className="text-green-600 text-xl" />
-                </motion.div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Our Office</h3>
-                  <p className="text-gray-600">
-                    123 Farm Road
-                    <br />
-                    Agricultural City, AC 12345
-                  </p>
+              {[
+                {
+                  icon: <FaMapMarkerAlt className="text-green-600 text-xl" />,
+                  title: "Our Office",
+                  lines: ["123 Farm Road", "Agricultural City, AC 12345"],
+                },
+                {
+                  icon: <FaPhoneAlt className="text-green-600 text-xl" />,
+                  title: "Phone Number",
+                  lines: ["+1 (234) 567-8900", "+1 (987) 654-3210"],
+                },
+                {
+                  icon: <FaEnvelope className="text-green-600 text-xl" />,
+                  title: "Email Address",
+                  lines: ["info@farmconnect.com", "support@farmconnect.com"],
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-4 text-left">
+                  <motion.div
+                    className="p-3 bg-green-100 rounded-lg"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    {item.icon}
+                  </motion.div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-gray-600">{item.lines.join("\n")}</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <motion.div
-                  className="p-3 bg-green-100 rounded-lg"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <FaPhoneAlt className="text-green-600 text-xl" />
-                </motion.div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Phone Number</h3>
-                  <p className="text-gray-600">
-                    +1 (234) 567-8900
-                    <br />
-                    +1 (987) 654-3210
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <motion.div
-                  className="p-3 bg-green-100 rounded-lg"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <FaEnvelope className="text-green-600 text-xl" />
-                </motion.div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Email Address</h3>
-                  <p className="text-gray-600">
-                    info@farmconnect.com
-                    <br />
-                    support@farmconnect.com
-                  </p>
-                </div>
-              </div>
+              ))}
 
               {/* Social Media */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="flex gap-6 mt-12"
+                className="flex gap-6 mt-12 justify-center items-center"
               >
                 {[
                   { icon: <FaFacebookF />, color: "#1877F2" },
@@ -955,9 +935,10 @@ const LandingPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-6"
+              className="space-y-6 max-w-md w-full"
             >
-              {/* <motion.div
+              {/* Example form fields — uncomment and customize */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -967,9 +948,9 @@ const LandingPage = () => {
                   placeholder="Your Name"
                   className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
-              </motion.div> */}
+              </motion.div>
 
-              {/* <motion.div
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -980,9 +961,9 @@ const LandingPage = () => {
                   placeholder="Your Email"
                   className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
-              </motion.div> */}
+              </motion.div>
 
-              {/* <motion.div
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -993,9 +974,9 @@ const LandingPage = () => {
                   rows="5"
                   className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 ></textarea>
-              </motion.div> */}
+              </motion.div>
 
-              {/* <motion.div
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -1007,7 +988,7 @@ const LandingPage = () => {
                 >
                   Send Message
                 </button>
-              </motion.div> */}
+              </motion.div>
             </motion.form>
           </div>
         </motion.div>

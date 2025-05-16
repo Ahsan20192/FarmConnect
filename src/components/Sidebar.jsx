@@ -17,13 +17,13 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
       {/* Sidebar */}
       <div
-        className={`fixed z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 transition-transform duration-200 ease-in-out shadow-lg 
-        bg-gradient-to-b from-green-700 to-green-600 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-64"
-        }`}
+        className={`fixed z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-auto no-scrollbar w-64 flex-shrink-0 transition-transform duration-200 ease-in-out shadow-lg 
+          bg-gradient-to-b from-green-700 to-green-600 ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-64"
+          }`}
       >
         {/* Sidebar header */}
-        <div className="flex justify-between items-center h-20 px-6 bg-green-800 border-b border-green-600">
+        <div className="flex justify-between items-center h-20 px-6 bg-gradient-to-b from-green-800 to-green-600  border-b border-green-600">
           <div className="flex items-center space-x-3">
             <div className="bg-yellow-400 p-2 rounded-full">
               <svg

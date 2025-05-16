@@ -1,45 +1,36 @@
-
 import React from "react";
-function Dashboard()
- {
-    function DashboardCard({
-      title,
-      value,
-      subtitle,
-      icon,
-      bgColor,
-      textColor,
-    }) {
-      return (
-        <div className={`${bgColor} ${textColor} rounded-lg shadow-sm p-6`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium opacity-80">{title}</p>
-              <p className="text-2xl font-bold mt-1">{value}</p>
-              {subtitle && (
-                <p className="text-xs mt-1 opacity-70">{subtitle}</p>
-              )}
-            </div>
-            <div className="ml-4">{icon}</div>
+function Dashboard() {
+  function DashboardCard({ title, value, subtitle, icon, bgColor, textColor }) {
+    return (
+      <div
+        className={`${bgColor} ${textColor} rounded-lg shadow-xl transform transition duration-300 ease-in-out hover:shadow-2xl hover:scale-105 p-6`}
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium opacity-80">{title}</p>
+            <p className="text-2xl font-bold mt-1">{value}</p>
+            {subtitle && <p className="text-xs mt-1 opacity-70">{subtitle}</p>}
           </div>
+          <div className="ml-4">{icon}</div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
   return (
-    <div>
+    <div className=" m-0 p-0">
       <h1 className="text-2xl font-semibold text-green-700 mb-6">
         Farmer Dashboard
       </h1>
 
       {/* Dashboard Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6  mb-6">
         {/* Active Orders */}
         <DashboardCard
           title="Active Orders"
           value="12"
           icon={
             <svg
-              className="w-8 h-8 text-green-600"
+              className="w-8 h-8 text-green-600 "
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -130,7 +121,7 @@ function Dashboard()
       {/* Main Content Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Orders */}
-        <div className="lg:col-span-2 bg-white rounded-lg shadow p-6">
+        <div className="lg:col-span-2 bg-white rounded-lg shadow-xl p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-gray-800">
               Recent Orders
@@ -145,7 +136,7 @@ function Dashboard()
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="text-xs font-semibold tracking-wide text-gray-500 uppercase border-b">
+                <tr className="text-xs font-semibold tracking-wide text-gray-500 uppercase border-b-2 border-b-gray-300">
                   <th className="px-4 py-3">Order ID</th>
                   <th className="px-4 py-3">Product</th>
                   <th className="px-4 py-3">Buyer</th>
@@ -154,7 +145,7 @@ function Dashboard()
                 </tr>
               </thead>
               <tbody className="divide-y">
-                <tr className="text-gray-700">
+                <tr className="text-gray-700 border-b-2 border-b-gray-300">
                   <td className="px-4 py-3">#ORD-2458</td>
                   <td className="px-4 py-3">Basmati Rice (50kg)</td>
                   <td className="px-4 py-3">Malik Foods</td>
@@ -165,7 +156,7 @@ function Dashboard()
                   </td>
                   <td className="px-4 py-3 font-semibold">₨ 4,500</td>
                 </tr>
-                <tr className="text-gray-700">
+                <tr className="text-gray-700 border-b-2 border-b-gray-300">
                   <td className="px-4 py-3">#ORD-2459</td>
                   <td className="px-4 py-3">Wheat (100kg)</td>
                   <td className="px-4 py-3">Ali Flour Mills</td>
@@ -176,7 +167,7 @@ function Dashboard()
                   </td>
                   <td className="px-4 py-3 font-semibold">₨ 6,200</td>
                 </tr>
-                <tr className="text-gray-700">
+                <tr className="text-gray-700 border-b-2 border-b-gray-300">
                   <td className="px-4 py-3">#ORD-2460</td>
                   <td className="px-4 py-3">Organic Tomatoes (25kg)</td>
                   <td className="px-4 py-3">Fresh Market</td>
@@ -280,5 +271,3 @@ function Dashboard()
   );
 }
 export default Dashboard;
-
-

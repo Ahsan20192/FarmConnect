@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Header({ sidebarOpen, setSidebarOpen }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+
+  // Get the name from Redux store
+  const { name } = useSelector((state) => state.user);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
-      setDropdownOpen(false);
       setNotificationsOpen(false);
     };
 
@@ -23,10 +25,10 @@ function Header({ sidebarOpen, setSidebarOpen }) {
   };
 
   return (
-    <header className="bg-green-700 shadow-md sticky top-0 z-30">
+    <header className="bg-green-700 shadow-md sticky top-0 z-30 ">
       <div className="px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
-          {/* Left: Hamburger button */}
+          {/* Hamburger menu */}
           <div className="flex lg:hidden">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -49,7 +51,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
             </button>
           </div>
 
-          {/* Middle: Logo for mobile */}
+          {/* Logo (mobile) */}
           <div className="lg:hidden flex items-center space-x-2">
             <svg
               className="w-7 h-7 text-yellow-400"
@@ -69,8 +71,8 @@ function Header({ sidebarOpen, setSidebarOpen }) {
             </span>
           </div>
 
-          {/* Right: Header items */}
-          <div className="flex items-center space-x-4">
+          {/* Right section */}
+          <div className="flex items-center space-x-4 ml-auto">
             {/* Weather */}
             <span className="hidden md:flex items-center text-white">
               <svg
@@ -97,7 +99,6 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                   e.preventDefault();
                   stopPropagation(e);
                   setNotificationsOpen(!notificationsOpen);
-                  setDropdownOpen(false);
                 }}
                 aria-label="Notifications"
               >
@@ -119,7 +120,6 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                 </span>
               </button>
 
-              {/* Notifications dropdown */}
               {notificationsOpen && (
                 <div
                   className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
@@ -147,35 +147,11 @@ function Header({ sidebarOpen, setSidebarOpen }) {
               )}
             </div>
 
-            {/* User Menu */}
-            <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  stopPropagation(e);
-                  setDropdownOpen(!dropdownOpen);
-                  setNotificationsOpen(false);
-                }}
-                className="flex items-center space-x-2 text-white hover:text-yellow-400 focus:outline-none"
-              >
-                <div className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                </div>
-                <span className="hidden md:inline">Ali Hassan</span>
+            {/* User Avatar + Name (No dropdown) */}
+            <div className="flex items-center space-x-2 text-white">
+              <div className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center">
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -184,37 +160,11 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-              </button>
-
-              {/* Dropdown */}
-              {dropdownOpen && (
-                <div
-                  className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
-                  onClick={stopPropagation}
-                >
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Settings
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Log out
-                  </a>
-                </div>
-              )}
+              </div>
+              <span className="hidden md:inline">{name || "Farmer"}</span>
             </div>
           </div>
         </div>
@@ -222,4 +172,5 @@ function Header({ sidebarOpen, setSidebarOpen }) {
     </header>
   );
 }
+
 export default Header;

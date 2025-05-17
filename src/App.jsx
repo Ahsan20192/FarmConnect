@@ -8,6 +8,8 @@ import { store } from "./App/store"; // ✅ Use named import if store.js uses na
 import LandingPage from "./pages/LandingPage";
 import AdminLayout from "./components/AdminLayout";
 import BuyerLayout from "./components/BuyerLayout";
+import SupplierLayout from "./components/SupplierLayout";
+
 //import FarmerProfile from "./pages/FarmerProfile";
 
 // Farmer Pages
@@ -44,6 +46,15 @@ export default function App() {
             <Route path="cart" element={<ShoppingCart />} />
           </Route>
           <Route path="/buyer" element={<BuyerLayout />}>
+            <Route index element={<BuyerDashboard />} />
+            <Route path="marketplace" element={<MarketPlace />} />
+            <Route path="productdetail" element={<ProductDetail />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="orderdetail" element={<OrderDetail />} />
+            <Route path="tracking" element={<DeliveryTracking />} />
+          </Route>
+          <Route path="/supplier" element={<SupplierLayout />}>
             <Route index element={<BuyerDashboard />} />
             <Route path="marketplace" element={<MarketPlace />} />
             <Route path="productdetail" element={<ProductDetail />} />

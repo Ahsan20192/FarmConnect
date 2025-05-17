@@ -19,6 +19,7 @@ import ProductManagement from "./pages/ProductManagement";
 import OrderManagement from "./pages/OrderManagement";
 import MarketInsight from "./pages/MarketInsights";
 import ShoppingCart from "./pages/ShoppingCart";
+import FarmerProfile from "./pages/FarmerProfile";
 
 // Buyer Pages
 import BuyerDashboard from "./pages/BuyerDashboard";
@@ -28,6 +29,8 @@ import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import OrderDetail from "./pages/OrderDetail";
 import DeliveryTracking from "./pages/DeliveryTracking";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
@@ -35,6 +38,17 @@ export default function App() {
       {" "}
       {/* ✅ FIXED */}
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/farmer" element={<AdminLayout />}>
@@ -44,6 +58,7 @@ export default function App() {
             <Route path="orders" element={<OrderManagement />} />
             <Route path="market" element={<MarketInsight />} />
             <Route path="cart" element={<ShoppingCart />} />
+            <Route path="farmerprofile" element={<FarmerProfile />} />
           </Route>
           <Route path="/buyer" element={<BuyerLayout />}>
             <Route index element={<BuyerDashboard />} />

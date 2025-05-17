@@ -120,7 +120,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                 </span>
               </button>
 
-              {notificationsOpen && (
+              {/* {notificationsOpen && (
                 <div
                   className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
                   onClick={stopPropagation}
@@ -144,7 +144,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                     Market price update
                   </a>
                 </div>
-              )}
+              )} */}
             </div>
 
             {/* User Avatar + Name (No dropdown) */}

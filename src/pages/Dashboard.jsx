@@ -3,7 +3,7 @@ function Dashboard() {
   function DashboardCard({ title, value, subtitle, icon, bgColor, textColor }) {
     return (
       <div
-        className={`${bgColor} ${textColor} rounded-lg shadow-xl transform transition duration-300 ease-in-out hover:shadow-2xl hover:scale-105 p-6`}
+        className={`${bgColor} ${textColor} rounded-lg  shadow-xl transform transition duration-300 ease-in-out hover:shadow-2xl hover:scale-105 p-6`}
       >
         <div className="flex items-center justify-between">
           <div>
@@ -17,7 +17,7 @@ function Dashboard() {
     );
   }
   return (
-    <div className=" m-0 p-0">
+    <div className=" m-0 p-0 ">
       <h1 className="text-2xl font-semibold text-green-700 mb-6">
         Farmer Dashboard
       </h1>

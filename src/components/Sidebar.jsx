@@ -17,13 +17,13 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
       {/* Sidebar */}
       <div
-        className={`fixed z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-auto no-scrollbar w-64 flex-shrink-0 transition-transform duration-200 ease-in-out shadow-lg 
+        className={`fixed z-40 overflow-y-auto scrollbar-hide left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen  w-64 flex-shrink-0 transition-transform duration-200 ease-in-out shadow-lg 
           bg-gradient-to-b from-green-700 to-green-600 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-64"
           }`}
       >
         {/* Sidebar header */}
-        <div className="flex justify-between items-center h-20 px-6 bg-gradient-to-b from-green-800 to-green-600  border-b border-green-600">
+        <div className="flex justify-between items-center h-14 px-6 bg-gradient-to-b from-green-800 to-green-600  border-b border-green-600">
           <div className="flex items-center space-x-3">
             <div className="bg-yellow-400 p-2 rounded-full">
               <svg
@@ -121,33 +121,23 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             Weather Alerts
           </NavItem>
           <NavItem
+            to="farmerProducts"
+            icon="search"
+            active={location.pathname === "/browse-products"}
+          >
+            Browse Products
+          </NavItem>
+          <NavItem
             to="cart"
             icon="shopping-cart"
             active={location.pathname === "/cart"}
           >
             Cart
           </NavItem>
-          {/* <p className="text-xs font-semibold text-green-200 uppercase tracking-wider px-3 mt-6 mb-2">
-            Market
-          </p> */}
-          {/* <NavItem
-            to="market"
-            icon="trending-up"
-            active={location.pathname === "/market"}
-          >
-            Market Insights
-          </NavItem> */}
-          {/* <NavItem
-            to="auction"
-            icon="gavel"
-            active={location.pathname === "/auction"}
-          >
-            Auction
-          </NavItem> */}
           <p className="text-xs font-semibold text-green-200 uppercase tracking-wider px-3 mt-6 mb-2">
             Other
           </p>
-          
+
           <NavItem
             to="farmerprofile"
             icon="profile"
@@ -162,7 +152,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           >
             Logout
           </NavItem>
-          
         </div>
 
         {/* Weather widget at bottom */}
@@ -258,6 +247,21 @@ function NavItem({ to, icon, active, children }) {
         />
       </svg>
     ),
+    search: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        />
+      </svg>
+    ),
     "trending-up": (
       <svg
         className="w-5 h-5"
@@ -338,7 +342,7 @@ function NavItem({ to, icon, active, children }) {
   return (
     <Link
       to={to}
-      className={`flex items-center px-3 py-3 rounded-lg transition duration-150 ${
+      className={`flex items-center px-3 py-3 rounded-lg overflow-y-auto scrollbar-hide transition duration-150 ${
         active
           ? "bg-green-500 text-white font-medium shadow-md"
           : "text-green-100 hover:bg-green-600 hover:text-white"

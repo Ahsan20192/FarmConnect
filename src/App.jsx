@@ -27,6 +27,7 @@ import MarketPlace from "./pages/MarketPlace";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
+import FarmerProducts from "./pages/FarmerProducts";
 import OrderDetail from "./pages/OrderDetail";
 import DeliveryTracking from "./pages/DeliveryTracking";
 import { ToastContainer } from "react-toastify";
@@ -53,7 +54,9 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/farmer" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
+            
             <Route path="weather" element={<WeatherAlerts />} />
+            <Route path="farmerProducts" element={<FarmerProducts />} />
             <Route path="products" element={<ProductManagement />} />
             <Route path="orders" element={<OrderManagement />} />
             <Route path="market" element={<MarketInsight />} />

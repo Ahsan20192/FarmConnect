@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const FarmerProducts = () => {
+const BuyerProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -10,7 +10,7 @@ const FarmerProducts = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [wishlistItems, setWishlistItems] = useState([]);
 
-  const API_URL = "https://agrofarm-vd8i.onrender.com/api/products/productForFarmer";
+  const API_URL = "https://agrofarm-vd8i.onrender.com/api/products/all";
   const CART_API = "https://agrofarm-vd8i.onrender.com/api/cart/add";
   const WISHLIST_API = "https://agrofarm-vd8i.onrender.com/api/wishlist/add";
 
@@ -144,7 +144,7 @@ const FarmerProducts = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <h1 className="text-3xl font-bold text-gray-800">
-            Browse  Products
+            Browse All Products
           </h1>
 
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
@@ -327,4 +327,4 @@ const FarmerProducts = () => {
   );
 };
 
-export default FarmerProducts;
+export default BuyerProducts;

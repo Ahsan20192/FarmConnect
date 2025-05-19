@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Dashboard() {
+function SupplierDashboard() {
   const [activeOrdersCount, setActiveOrdersCount] = useState(0);
   const [productsCount, setProductsCount] = useState(0);
   const [revenue, setRevenue] = useState(0);
@@ -16,8 +16,9 @@ function Dashboard() {
 
         // Fetch active orders count
         const ordersResponse = await axios.get(
-          "https://agrofarm-vd8i.onrender.com/api/v1/order/supplier-orders",{
-            withCredentials:true,
+          "https://agrofarm-vd8i.onrender.com/api/v1/order/supplier-orders",
+          {
+            withCredentials: true,
           }
         );
         setActiveOrdersCount(ordersResponse.data.count);
@@ -28,7 +29,6 @@ function Dashboard() {
 
         const completedOrders = ordersResponse.data.orders.filter(
           (order) =>
-
             order.status === "delivered" &&
             new Date(order.createdAt).getMonth() === currentMonth &&
             new Date(order.createdAt).getFullYear() === currentYear
@@ -47,7 +47,7 @@ function Dashboard() {
         const productsResponse = await axios.get(
           "https://agrofarm-vd8i.onrender.com/api/products/my_product",
           {
-            withCredentials:true,
+            withCredentials: true,
           }
         );
         setProductsCount(productsResponse.data.products?.length || 0);
@@ -91,7 +91,7 @@ function Dashboard() {
   return (
     <div className="m-0 p-0">
       <h1 className="text-2xl font-semibold text-green-700 mb-6">
-        Farmer Dashboard
+        Supplier Dashboard
       </h1>
 
       {/* Dashboard Stats Cards */}
@@ -352,4 +352,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default SupplierDashboard;

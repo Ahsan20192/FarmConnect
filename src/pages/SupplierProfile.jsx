@@ -12,7 +12,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const FarmerProfile = () => {
+const SupplierProfile = () => {
   // Cloudinary configuration
   const CLOUD_NAME = "dn5edjpzg";
   const UPLOAD_PRESET = "FarmConnect";
@@ -48,8 +48,6 @@ const FarmerProfile = () => {
 
   // Fetch profile data on mount
   useEffect(() => {
-  
-
     fetchProfileData();
 
     return () => {
@@ -62,7 +60,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/me",
+        "https://agrofarm-vd8i.onrender.com/api/suppliers/me",
         { credentials: "include" }
       );
 
@@ -125,7 +123,7 @@ const FarmerProfile = () => {
 
       // Update profile
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/update",
+        "https://agrofarm-vd8i.onrender.com/api/suppliers/update",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -166,7 +164,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/logout",
+        "https://agrofarm-vd8i.onrender.com/api/suppliers/logout",
         { method: "GET", credentials: "include" }
       );
 
@@ -200,7 +198,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/changepassword",
+        "https://agrofarm-vd8i.onrender.com/api/suppliers/change-password",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -263,7 +261,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/delete",
+        "https://agrofarm-vd8i.onrender.com/api/suppliers/delete",
         { method: "DELETE", credentials: "include" }
       );
 
@@ -666,4 +664,4 @@ const FarmerProfile = () => {
   );
 };
 
-export default FarmerProfile;
+export default SupplierProfile;

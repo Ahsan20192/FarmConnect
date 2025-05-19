@@ -527,13 +527,13 @@ const API_MAP = {
 const roleVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -10 }
+  exit: { opacity: 0, y: -10 },
 };
 
 const inputVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 20 }
+  exit: { opacity: 0, x: 20 },
 };
 
 const AuthModal = ({ isOpen, onClose }) => {
@@ -635,10 +635,13 @@ const AuthModal = ({ isOpen, onClose }) => {
       });
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Authentication failed");
+      if (!response.ok)
+        throw new Error(data.message || "Authentication failed");
 
       if (isSignup) {
-        setSuccessMessage("✅ Registered successfully! Please verify your email.");
+        setSuccessMessage(
+          "✅ Registered successfully! Please verify your email."
+        );
         setStep("otp");
       } else {
         const fullMessage = data.message || "";
@@ -675,12 +678,13 @@ const AuthModal = ({ isOpen, onClose }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.email,
-          phone: formData.phone
+          phone: formData.phone,
         }),
       });
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Failed to send reset instructions");
+      if (!response.ok)
+        throw new Error(data.message || "Failed to send reset instructions");
 
       setSuccessMessage("📨 Reset instructions sent! Check your email/phone.");
       setStep("reset");
@@ -708,12 +712,13 @@ const AuthModal = ({ isOpen, onClose }) => {
           email: formData.email,
           phone: formData.phone,
           otp,
-          newPassword
+          newPassword,
         }),
       });
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Password reset failed");
+      if (!response.ok)
+        throw new Error(data.message || "Password reset failed");
 
       setSuccessMessage("✅ Password reset successfully! You can now login.");
       setTimeout(() => {
@@ -801,10 +806,10 @@ const AuthModal = ({ isOpen, onClose }) => {
                   type={field === "phone" ? "tel" : "text"}
                   name={field}
                   placeholder={
-                    field === "name" 
-                      ? "Full Name" 
-                      : field === "phone" 
-                      ? "Phone Number" 
+                    field === "name"
+                      ? "Full Name"
+                      : field === "phone"
+                      ? "Phone Number"
                       : "Address"
                   }
                   value={formData[field]}
@@ -1098,7 +1103,7 @@ const AuthModal = ({ isOpen, onClose }) => {
   );
 
   const renderOTPForm = () => (
-    <motion.div 
+    <motion.div
       className="space-y-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -1112,7 +1117,7 @@ const AuthModal = ({ isOpen, onClose }) => {
       >
         We've sent a 6-digit code to {formData.email}
       </motion.div>
-      
+
       <motion.input
         type="text"
         value={otp}
@@ -1124,7 +1129,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         variants={inputVariants}
         transition={{ delay: 0.5 }}
       />
-      
+
       <FormMessages error={errorMessage} success={successMessage} />
 
       <motion.div
@@ -1153,7 +1158,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             "Verify OTP"
           )}
         </motion.button>
-        
+
         <motion.button
           onClick={handleResendOTP}
           disabled={loading}
@@ -1183,34 +1188,34 @@ const AuthModal = ({ isOpen, onClose }) => {
           className="bg-gradient-to-br from-green-900/30 to-blue-900/30 border border-white/20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl w-full max-w-md relative overflow-hidden"
         >
           {/* Decorative elements */}
-          <motion.div 
+          <motion.div
             className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-green-500/20 blur-xl"
-            animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.2, 0.3, 0.2]
+              opacity: [0.2, 0.3, 0.2],
             }}
-            transition={{ 
+            transition={{
               duration: 8,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
-          <motion.div 
+          <motion.div
             className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-blue-500/20 blur-xl"
-            animate={{ 
+            animate={{
               scale: [1, 1.1, 1],
-              opacity: [0.2, 0.4, 0.2]
+              opacity: [0.2, 0.4, 0.2],
             }}
-            transition={{ 
+            transition={{
               duration: 6,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 1
+              delay: 1,
             }}
           />
 
           <div className="relative z-10">
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold text-center text-white mb-6"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -1228,7 +1233,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             </motion.h2>
 
             {step === "auth" && (
-              <motion.div 
+              <motion.div
                 className="flex justify-center space-x-3 mb-6"
                 initial="hidden"
                 animate="visible"
@@ -1236,9 +1241,9 @@ const AuthModal = ({ isOpen, onClose }) => {
                 variants={{
                   visible: {
                     transition: {
-                      staggerChildren: 0.1
-                    }
-                  }
+                      staggerChildren: 0.1,
+                    },
+                  },
                 }}
               >
                 {["Farmer", "Buyer", "Supplier"].map((r) => (
@@ -1260,7 +1265,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               </motion.div>
             )}
 
-            {step === "otp" 
+            {step === "otp"
               ? renderOTPForm()
               : step === "forgot"
               ? renderForgotPasswordForm()
@@ -1402,4 +1407,3 @@ const FormMessages = ({ error, success }) => (
 );
 
 export default AuthModal;
-

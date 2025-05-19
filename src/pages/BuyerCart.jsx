@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
-function ShoppingCart() {
+function BuyerCart() {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -69,7 +69,7 @@ function ShoppingCart() {
       toast.success("Order placed successfully!");
       setShowCheckoutModal(false);
       fetchCartItems();
-      navigate("/farmer/myorders");
+      navigate("/buyer/myorders");
     } catch (err) {
       console.error("Error placing order:", err);
       toast.error(err.message || "Failed to place order. Please try again.");
@@ -456,7 +456,7 @@ function ShoppingCart() {
 
                   <button
                     onClick={() => {
-                      navigate("/farmer/farmerProducts");
+                      navigate("/buyer/products");
                     }}
                     className="w-full py-3 px-4 border border-gray-300 text-gray-700 font-medium rounded-lg shadow-sm hover:bg-gray-50 transition-colors"
                   >
@@ -735,4 +735,4 @@ function ShoppingCart() {
   );
 }
 
-export default ShoppingCart;
+export default BuyerCart;

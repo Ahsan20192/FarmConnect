@@ -12,7 +12,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const FarmerProfile = () => {
+const BuyerProfile = () => {
   // Cloudinary configuration
   const CLOUD_NAME = "dn5edjpzg";
   const UPLOAD_PRESET = "FarmConnect";
@@ -48,8 +48,6 @@ const FarmerProfile = () => {
 
   // Fetch profile data on mount
   useEffect(() => {
-  
-
     fetchProfileData();
 
     return () => {
@@ -62,7 +60,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/me",
+        "https://agrofarm-vd8i.onrender.com/api/buyers/me",
         { credentials: "include" }
       );
 
@@ -125,7 +123,7 @@ const FarmerProfile = () => {
 
       // Update profile
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/update",
+        "https://agrofarm-vd8i.onrender.com/api/buyers/update",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -166,7 +164,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/logout",
+        "https://agrofarm-vd8i.onrender.com/api/buyers/logout",
         { method: "GET", credentials: "include" }
       );
 
@@ -200,7 +198,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/changepassword",
+        "https://agrofarm-vd8i.onrender.com/api/buyers/change-password",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -263,7 +261,7 @@ const FarmerProfile = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://agrofarm-vd8i.onrender.com/api/farmers/delete",
+        "https://agrofarm-vd8i.onrender.com/api/buyers/delete",
         { method: "DELETE", credentials: "include" }
       );
 
@@ -309,7 +307,7 @@ const FarmerProfile = () => {
             animate={{ y: 0 }}
             className="text-2xl sm:text-3xl font-bold text-gray-800"
           >
-            Farmer Profile
+            Buyer Profile
           </motion.h1>
 
           <div className="flex gap-3 w-full sm:w-auto">
@@ -666,4 +664,4 @@ const FarmerProfile = () => {
   );
 };
 
-export default FarmerProfile;
+export default BuyerProfile;

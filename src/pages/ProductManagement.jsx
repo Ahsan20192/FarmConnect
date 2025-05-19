@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const ProductManagement = () => {
+  // State variables
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -13,13 +14,36 @@ const ProductManagement = () => {
     price: "",
     unit: "kg",
     quantity: "",
+    category: "",
     images: [],
   });
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // Constants
   const CLOUDINARY_UPLOAD_PRESET = "FarmConnect";
   const CLOUDINARY_CLOUD_NAME = "dn5edjpzg";
-  const [imagePreview, setImagePreview] = useState(null);
   const API_BASE = "https://agrofarm-vd8i.onrender.com/api/products";
 
+  // Categories list
+  const categories = [
+    { id: "fruits", name: "Fruits" },
+    { id: "vegetables", name: "Vegetables" },
+    { id: "crops", name: "Crops" },
+    { id: "pesticides", name: "Pesticides" },
+    { id: "fertilizer", name: "Fertilizer" },
+    { id: "other", name: "Other" },
+  ];
+
+  // Units list
+  const units = [
+    { id: "kg", name: "Kilogram (kg)" },
+    { id: "g", name: "Gram (g)" },
+    { id: "lb", name: "Pound (lb)" },
+    { id: "maund", name: "Maund (maund)" },
+    { id: "piece", name: "Piece" },
+  ];
+
+  // Fetch products from API
   const fetchMyProducts = async () => {
     try {
       setLoading(true);
@@ -47,6 +71,7 @@ const ProductManagement = () => {
     }
   };
 
+  // Handle adding a new product
   const handleAddProduct = async (e) => {
     e.preventDefault();
     try {
@@ -84,6 +109,7 @@ const ProductManagement = () => {
     }
   };
 
+  // Handle editing a product
   const handleEditProduct = async (e) => {
     e.preventDefault();
     try {
@@ -121,6 +147,7 @@ const ProductManagement = () => {
     }
   };
 
+  // Handle deleting a product
   const handleDeleteProduct = async (productId) => {
     if (!window.confirm("Are you sure you want to delete this product?"))
       return;
@@ -150,6 +177,7 @@ const ProductManagement = () => {
     }
   };
 
+  // Reset form to initial state
   const resetForm = () => {
     setFormData({
       name: "",
@@ -157,11 +185,13 @@ const ProductManagement = () => {
       price: "",
       unit: "kg",
       quantity: "",
+      category: "",
       images: [],
     });
     setImagePreview(null);
   };
 
+  // Handle edit button click
   const handleEditClick = (product) => {
     setEditingProductId(product._id);
     setFormData({
@@ -170,6 +200,7 @@ const ProductManagement = () => {
       price: product.price.toString(),
       unit: product.unit,
       quantity: product.quantity.toString(),
+      category: product.category || "",
       images: product.images || [],
     });
     if (product.images?.[0]) {
@@ -178,6 +209,7 @@ const ProductManagement = () => {
     setShowEditForm(true);
   };
 
+  // Handle image upload
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -210,10 +242,12 @@ const ProductManagement = () => {
     }
   };
 
+  // Fetch products on component mount
   useEffect(() => {
     fetchMyProducts();
   }, []);
 
+  // Render product form
   const renderProductForm = (isEdit = false) => (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn">
       <div className="p-6">
@@ -268,6 +302,27 @@ const ProductManagement = () => {
 
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">
+                Category *
+              </label>
+              <select
+                value={formData.category}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.target.value })
+                }
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+              >
+                <option value="">Select a category</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
                 Price (Rs.) *
               </label>
               <div className="relative">
@@ -300,10 +355,11 @@ const ProductManagement = () => {
                 }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
               >
-                <option value="kg">Kilogram (kg)</option>
-                <option value="g">Gram (g)</option>
-                <option value="lb">Pound (lb)</option>
-                <option value="piece">Piece</option>
+                {units.map((unit) => (
+                  <option key={unit.id} value={unit.id}>
+                    {unit.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -642,9 +698,16 @@ const ProductManagement = () => {
                 </div>
               </div>
               <div className="p-5">
-                <h3 className="text-xl font-semibold text-gray-800 mb-1">
-                  {product.name}
-                </h3>
+                <div className="flex flex-row justify-between">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                    {product.name}
+                  </h3>
+                  {product.category && (
+                    <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mb-2">
+                      {product.category}
+                    </span>
+                  )}
+                </div>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                   {product.description}
                 </p>

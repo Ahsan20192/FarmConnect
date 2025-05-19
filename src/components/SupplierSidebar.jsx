@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function SupplierSidebar({ sidebarOpen, setSidebarOpen }) {
@@ -17,13 +17,13 @@ function SupplierSidebar({ sidebarOpen, setSidebarOpen }) {
 
       {/* Sidebar */}
       <div
-        className={`fixed z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 transition-transform duration-200 ease-in-out shadow-lg 
-        bg-gradient-to-b from-green-700 to-green-600 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-64"
-        }`}
+        className={`fixed z-40 overflow-y-auto scrollbar-hide left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen  w-64 flex-shrink-0 transition-transform duration-200 ease-in-out shadow-lg 
+          bg-gradient-to-b from-green-700 to-green-600 ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-64"
+          }`}
       >
         {/* Sidebar header */}
-        <div className="flex justify-between items-center h-20 px-6 bg-green-800 border-b border-green-600">
+        <div className="flex justify-between items-center h-14 px-6 bg-gradient-to-b from-green-800 to-green-600  border-b border-green-600">
           <div className="flex items-center space-x-3">
             <div className="bg-yellow-400 p-2 rounded-full">
               <svg
@@ -41,7 +41,7 @@ function SupplierSidebar({ sidebarOpen, setSidebarOpen }) {
               </svg>
             </div>
             <Link
-              to="buyer"
+              to="/"
               className="text-xl font-bold text-white tracking-wider"
             >
               FarmConnect
@@ -87,7 +87,7 @@ function SupplierSidebar({ sidebarOpen, setSidebarOpen }) {
           </div>
           <div className="ml-3">
             <p className="text-white font-medium">Welcome back</p>
-            <p className="text-green-200 text-sm">Buyer Account</p>
+            <p className="text-green-200 text-sm">Supplier Account</p>
           </div>
         </div>
 
@@ -96,34 +96,23 @@ function SupplierSidebar({ sidebarOpen, setSidebarOpen }) {
           <p className="text-xs font-semibold text-green-200 uppercase tracking-wider px-3 mb-2">
             Main Menu
           </p>
-          <NavItem to="" icon="grid" active={location.pathname === "/buyer"}>
+          <NavItem to="" icon="grid" active={location.pathname === "/"}>
             Dashboard
           </NavItem>
           <NavItem
-            to="marketplace"
-            icon="shopping-bag"
-            active={location.pathname === "/marketplace"}
+            to="products"
+            icon="plant"
+            active={location.pathname === "/products"}
           >
-            Marketplace
-          </NavItem>
-          <NavItem
-            to="auctions"
-            icon="gavel"
-            active={location.pathname === "/auctions"}
-          >
-            Auctions
+            My Products
           </NavItem>
           <NavItem
             to="orders"
             icon="shopping-cart"
             active={location.pathname === "/orders"}
           >
-            My Orders
+            Orders
           </NavItem>
-
-          <p className="text-xs font-semibold text-green-200 uppercase tracking-wider px-3 mt-6 mb-2">
-            Discover
-          </p>
           <NavItem
             to="weather"
             icon="cloud-rain"
@@ -131,37 +120,24 @@ function SupplierSidebar({ sidebarOpen, setSidebarOpen }) {
           >
             Weather Alerts
           </NavItem>
-          <NavItem
-            to="market"
-            icon="trending-up"
-            active={location.pathname === "/market"}
-          >
-            Market Insights
-          </NavItem>
-          <NavItem
-            to="saved"
-            icon="heart"
-            active={location.pathname === "/saved"}
-          >
-            Saved Products
-          </NavItem>
-          <NavItem
-            to="farmers"
-            icon="users"
-            active={location.pathname === "/farmers"}
-          >
-            Find Farmers
-          </NavItem>
 
           <p className="text-xs font-semibold text-green-200 uppercase tracking-wider px-3 mt-6 mb-2">
-            Account
+            Other
           </p>
+
           <NavItem
-            to="settings"
-            icon="settings"
-            active={location.pathname === "/settings"}
+            to="profile"
+            icon="profile"
+            active={location.pathname === "/profile"}
           >
-            Settings
+            Profile
+          </NavItem>
+          <NavItem
+            to="/"
+            icon="logout"
+            active={location.pathname === "/reports"}
+          >
+            Logout
           </NavItem>
         </div>
 
@@ -213,7 +189,7 @@ function NavItem({ to, icon, active, children }) {
         />
       </svg>
     ),
-    "shopping-bag": (
+    plant: (
       <svg
         className="w-5 h-5"
         fill="none"
@@ -224,28 +200,7 @@ function NavItem({ to, icon, active, children }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M5 8h14l1 12H4L5 8z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M16 8a4 4 0 01-8 0"
-        />
-      </svg>
-    ),
-    gavel: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
         />
       </svg>
     ),
@@ -279,7 +234,7 @@ function NavItem({ to, icon, active, children }) {
         />
       </svg>
     ),
-    "trending-up": (
+    search: (
       <svg
         className="w-5 h-5"
         fill="none"
@@ -290,7 +245,7 @@ function NavItem({ to, icon, active, children }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
         />
       </svg>
     ),
@@ -309,7 +264,7 @@ function NavItem({ to, icon, active, children }) {
         />
       </svg>
     ),
-    users: (
+    "trending-up": (
       <svg
         className="w-5 h-5"
         fill="none"
@@ -320,11 +275,11 @@ function NavItem({ to, icon, active, children }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+          d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
         />
       </svg>
     ),
-    settings: (
+    gavel: (
       <svg
         className="w-5 h-5"
         fill="none"
@@ -335,13 +290,52 @@ function NavItem({ to, icon, active, children }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
         />
+      </svg>
+    ),
+    "file-text": (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
+      </svg>
+    ),
+    profile: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        />
+      </svg>
+    ),
+    logout: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
         />
       </svg>
     ),
@@ -350,7 +344,7 @@ function NavItem({ to, icon, active, children }) {
   return (
     <Link
       to={to}
-      className={`flex items-center px-3 py-3 rounded-lg transition duration-150 ${
+      className={`flex items-center px-3 py-3 rounded-lg overflow-y-auto scrollbar-hide transition duration-150 ${
         active
           ? "bg-green-500 text-white font-medium shadow-md"
           : "text-green-100 hover:bg-green-600 hover:text-white"

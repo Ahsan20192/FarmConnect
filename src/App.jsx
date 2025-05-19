@@ -32,6 +32,13 @@ import OrderDetail from "./pages/OrderDetail";
 import DeliveryTracking from "./pages/DeliveryTracking";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Whishlist from "./pages/Whishlist";
+import MyOrders from "./pages/MyOrders";
+import SupplierDashboard from "./pages/SupplierDashboard";
+import SupplierProfile from "./pages/SupplierProfile";
+import BuyerProducts from "./pages/BuyerProducts";
+import BuyerCart from "./pages/BuyerCart";
+import BuyerProfile from "./pages/BuyerProfile";
 
 export default function App() {
   return (
@@ -54,32 +61,30 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/farmer" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
-            
+
             <Route path="weather" element={<WeatherAlerts />} />
             <Route path="farmerProducts" element={<FarmerProducts />} />
             <Route path="products" element={<ProductManagement />} />
             <Route path="orders" element={<OrderManagement />} />
-            <Route path="market" element={<MarketInsight />} />
+            <Route path="wishlist" element={<Whishlist />} />
             <Route path="cart" element={<ShoppingCart />} />
+            <Route path="myorders" element={<MyOrders />} />
             <Route path="farmerprofile" element={<FarmerProfile />} />
           </Route>
           <Route path="/buyer" element={<BuyerLayout />}>
             <Route index element={<BuyerDashboard />} />
-            <Route path="marketplace" element={<MarketPlace />} />
-            <Route path="productdetail" element={<ProductDetail />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="orderdetail" element={<OrderDetail />} />
-            <Route path="tracking" element={<DeliveryTracking />} />
+            <Route path="products" element={<BuyerProducts />} />
+            <Route path="cart" element={<BuyerCart />} />
+            <Route path="myorders" element={<MyOrders />} />
+            <Route path="wishlist" element={<Whishlist />} />
+            <Route path="buyerprofile" element={<BuyerProfile />} />
           </Route>
           <Route path="/supplier" element={<SupplierLayout />}>
-            <Route index element={<BuyerDashboard />} />
-            <Route path="marketplace" element={<MarketPlace />} />
-            <Route path="productdetail" element={<ProductDetail />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="orderdetail" element={<OrderDetail />} />
-            <Route path="tracking" element={<DeliveryTracking />} />
+            <Route index element={<SupplierDashboard />} />
+            <Route path="products" element={<ProductManagement />} />
+            <Route path="orders" element={<OrderManagement />} />
+            <Route path="weather" element={<WeatherAlerts />} />
+            <Route path="profile" element={<SupplierProfile />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,7 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+     
+      const response = await fetch(
+        "https://agrofarm-vd8i.onrender.com/api/farmers/logout",
+        { method: "GET", credentials: "include" }
+      );
+
+      if (!response.ok) throw new Error("Logout failed");
+      console.log("loged out");
+      toast.success("Logged out successfully");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   const location = useLocation();
 
   return (
@@ -161,9 +181,12 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             Profile
           </NavItem>
           <NavItem
+            onClick={handleLogout}
             to="/"
+
             icon="logout"
             active={location.pathname === "/reports"}
+            
           >
             Logout
           </NavItem>
@@ -372,6 +395,7 @@ function NavItem({ to, icon, active, children }) {
   return (
     <Link
       to={to}
+      
       className={`flex items-center px-3 py-3 rounded-lg overflow-y-auto scrollbar-hide transition duration-150 ${
         active
           ? "bg-green-500 text-white font-medium shadow-md"

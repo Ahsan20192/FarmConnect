@@ -34,6 +34,8 @@ import SupplierProfile from "./pages/SupplierProfile";
 // Toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Auth Context
 // import { AuthProvider } from "./context/AuthContext";
@@ -42,55 +44,77 @@ import "react-toastify/dist/ReactToastify.css";
 export default function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <ToastContainer
-          position="top-right"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <Routes>
-          {/* Public Route */}
-          <Route path="/" element={<LandingPage />} />
+      <AuthProvider>
+        <BrowserRouter>
+          <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <Routes>
+            {/* Public Route */}
+            <Route path="/" element={<LandingPage />} />
 
-          {/* Protected Farmer Routes */}
-          <Route path="/farmer" element={<AdminLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="weather" element={<WeatherAlerts />} />
-            <Route path="farmerProducts" element={<FarmerProducts />} />
-            <Route path="products" element={<ProductManagement />} />
-            <Route path="orders" element={<OrderManagement />} />
-            <Route path="wishlist" element={<Whishlist />} />
-            <Route path="cart" element={<ShoppingCart />} />
-            <Route path="myorders" element={<MyOrders />} />
-            <Route path="farmerprofile" element={<FarmerProfile />} />
-          </Route>
-
-          {/* Protected Buyer Routes */}
-          <Route path="/buyer" element={<BuyerLayout />}>
-            <Route index element={<BuyerDashboard />} />
-            <Route path="products" element={<BuyerProducts />} />
-            <Route path="cart" element={<BuyerCart />} />
-            <Route path="myorders" element={<MyOrders />} />
-            <Route path="wishlist" element={<Whishlist />} />
-            <Route path="buyerprofile" element={<BuyerProfile />} />
-          </Route>
-
-          {/* Protected Supplier Routes */}
-          <Route path="/supplier" element={<SupplierLayout />}>
-            <Route index element={<SupplierDashboard />} />
-            <Route path="products" element={<ProductManagement />} />
-            <Route path="orders" element={<OrderManagement />} />
-            <Route path="weather" element={<WeatherAlerts />} />
-            <Route path="profile" element={<SupplierProfile />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            {/* Protected Farmer Routes */}
+            <Route
+              path="/farmer"
+              element={
+                <ProtectedRoute allowedRoles={["farmer"]}>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Dashboard />} />
+              <Route path="weather" element={<WeatherAlerts />} />
+              <Route path="farmerProducts" element={<FarmerProducts />} />
+              <Route path="products" element={<ProductManagement />} />
+              <Route path="orders" element={<OrderManagement />} />
+              <Route path="wishlist" element={<Whishlist />} />
+              <Route path="cart" element={<ShoppingCart />} />
+              <Route path="myorders" element={<MyOrders />} />
+              <Route path="farmerprofile" element={<FarmerProfile />} />
+            </Route>
+            {/* Protected Buyer Routes */}
+            <Route
+              path="/buyer"
+              element={
+                <ProtectedRoute allowedRoles={["buyer"]}>
+                  <BuyerLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<BuyerDashboard />} />
+              <Route path="products" element={<BuyerProducts />} />
+              <Route path="cart" element={<BuyerCart />} />
+              <Route path="myorders" element={<MyOrders />} />
+              <Route path="wishlist" element={<Whishlist />} />
+              <Route path="buyerprofile" element={<BuyerProfile />} />
+            </Route>
+            {/* Protected Supplier Routes */}
+            <Route
+              path="/supplier"
+              element={
+                <ProtectedRoute >
+                  <SupplierLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<SupplierDashboard />} />
+              <Route path="products" element={<ProductManagement />} />
+              <Route path="orders" element={<OrderManagement />} />
+              <Route path="weather" element={<WeatherAlerts />} />
+              <Route path="profile" element={<SupplierProfile />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      
+      </AuthProvider>
     </Provider>
   );
 }

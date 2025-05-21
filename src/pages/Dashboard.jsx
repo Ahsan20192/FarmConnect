@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/userSlice";
 
 function Dashboard() {
   const [activeOrdersCount, setActiveOrdersCount] = useState(0);
@@ -8,6 +10,7 @@ function Dashboard() {
   const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {

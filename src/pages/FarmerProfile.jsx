@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/userSlice";
 import {
   FiEdit,
   FiCamera,
@@ -16,7 +18,7 @@ const FarmerProfile = () => {
   // Cloudinary configuration
   const CLOUD_NAME = "dn5edjpzg";
   const UPLOAD_PRESET = "FarmConnect";
-
+  const dispatch=useDispatch();
   // State management
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
@@ -51,7 +53,7 @@ const FarmerProfile = () => {
   
 
     fetchProfileData();
-
+    
     return () => {
       if (tempData.imgPreview) {
         URL.revokeObjectURL(tempData.imgPreview);
@@ -153,6 +155,7 @@ const FarmerProfile = () => {
       setTempData({ name, email, phone, address, img, imgPreview: "" });
       setIsEditing(false);
       toast.success("Profile updated successfully");
+      //dispatch(setUser({name,img}));
       fetchProfileData();
     } catch (error) {
       toast.error(error.message);

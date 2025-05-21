@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "",
+  img:"",
   // Add more fields as needed
 };
 
@@ -12,9 +13,11 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.name = action.payload.name;
+      state.img=action.payload.img;
     },
     clearUser(state) {
       state.name = "";
+      state.img="";
     },
   },
 });

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const ProductManagement = () => {
   // State variables
@@ -59,7 +60,9 @@ const ProductManagement = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message || "Failed to fetch Products");
         throw new Error(errorData.message || "Failed to fetch products");
+
       }
 
       const data = await response.json();
@@ -96,6 +99,7 @@ const ProductManagement = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message || "Failed to addd product");
         throw new Error(errorData.message || "Failed to add product");
       }
 
@@ -134,9 +138,11 @@ const ProductManagement = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message || "Failed to update product");
         throw new Error(errorData.message || "Failed to update product");
       }
-
+      const data = await response.json();
+      toast.success(data.message || "Product Updated successfully");
       await fetchMyProducts();
       setShowEditForm(false);
       resetForm();
@@ -166,9 +172,11 @@ const ProductManagement = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message || "Failed to delete product");
         throw new Error(errorData.message || "Failed to delete product");
       }
-
+      const data = await response.json();
+      toast.success(data.message || "Product deleted successfully");
       await fetchMyProducts();
     } catch (err) {
       setError(err.message);

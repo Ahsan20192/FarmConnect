@@ -11,11 +11,14 @@ import {
 } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/userSlice";
 
 const BuyerProfile = () => {
   // Cloudinary configuration
   const CLOUD_NAME = "dn5edjpzg";
   const UPLOAD_PRESET = "FarmConnect";
+  const dispatch =useDispatch();
 
   // State management
   const navigate = useNavigate();
@@ -151,6 +154,7 @@ const BuyerProfile = () => {
       setTempData({ name, email, phone, address, img, imgPreview: "" });
       setIsEditing(false);
       toast.success("Profile updated successfully");
+      //dispatch(setUser({name,img}));
       fetchProfileData();
     } catch (error) {
       toast.error(error.message);
